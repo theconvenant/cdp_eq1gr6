@@ -1,6 +1,6 @@
 <h4>Sprint 3 :</h4>
 
-<h5>Difficulté du sprint : 12</h5>
+<h5>Difficulté du sprint : 14</h5>
 
 | ID   | Priorité | Difficulté | Description                                                                                                                                                                                                                                                                                                                         |
 |------|----------|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -12,3 +12,4 @@
 | US31 | 1        | 1          | En tant que participant au projet, je souhaite que lorsque je clique sur le nom d'une issue, peut importe dans quel onglet je suis, je sois redirigé vers l'issue dans l'onglet issue et la fenêtre d'informations correspondante s'affiche\.                                                                                       |
 | US32 | 1        | 1          | En tant que participant au projet, je souhaite trier mes tâches dans l'onglet "Tasks" ordre alphabétique, par état, par difficulté ou par membre grâce à un menu déroulant "Order by"\.                                                                                                                                             |
 | US33 | 1        | 3          | En tant que participant au projet, je souhaite qu'une couleur me soit attibuée et qu'elle serve de bordure pour différencier l'attribution des taches et des tests\.                                                                                                                                                                |
+| US34 | 1        | 2          | En tant que participant au projet, je souhaite ajouter un lien github à l'aide d'un bouton "add github project" dans l'onglet "Summary" afin qu'il soit accessible par tous\.                                                                                                                                                                |
