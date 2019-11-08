@@ -1,35 +1,136 @@
-| ID  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Issues correspondantes | Dépendances | Durée \(j/h\) | Etat | Membres |
+| ID | Description | Issues correspondantes | Dépendances | Durée (j/h) | Etat | Membres |
 |-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|-------------|---------------|------|---------|
-| 100 | Démarage du projet\. Création d'un fichier " package\.json " qui va définir le projet\. Le projet aura pour nom : saf\-scrum ; Il commencera en version 0\.1\.0 ; Ces dépendances seront : " express ", " ejs ", " body\-parser ", "passport" \.\.; son main se nommera " server\.js ", il aura pour description : " projet saf\-scrum "   Définition de l'architecture : On choisira Model\-Vue\-Controller , donc création des dossiers model, views et controller\. Le fichier server\.js est déplacé dans le dossier "controller" | NOTHING                | NOTHING     | 0\.5          | TODO | Simon   |
-| 101 | Création de la base de données MySQL sur phpMyAdmin avec pour info :  host: "phpmyadmin link",   user: "agourgue",   password: "cdp\-2019",   database: "saf\-scrum\_db"                                                                                                                                                                                                                                                                                                                                                              | NOTHING                | NOTHING     | 0\.5          | TODO | Antoine |
-| 102 | Initialisation des tables dans la base de données \(Users, Projects, Issues, Tests, Tasks, Documentation, Sprints, Releases, Tasks\_Users, Projects\_Users, Tasks\_Tasks, Sprints\_Issues, Releases\_Issues et Sprints\_Releases\)\. Cf : le diagramme de la base de données                                                                                                                                                                                                                                                          | NOTHING                | NOTHING     | 0\.5          | TODO | Antoine |
-| 103 | Création du fichier "database\.js" qui fais la connexion avec la base de données\. Créer la fonction de récupération de la table en se connectant à la base données\.                                                                                                                                                                                                                                                                                                                                                                 | NOTHING                | 102         | 0\.5          | TODO | Antoine |
-| 104 | Création des fonctions de récupérations des tables\. Création de la fonction de création d'une table à la création d'un projet\.                                                                                                                                                                                                                                                                                                                                                                                                      | NOTHING                | 103         | 1             | TODO | Antoine |
-| 105 | Création de la page d'accueil avec un fichier "index\.js" dans model et "index\.ejs" dans le dossier views\.                                                                                                                                                                                                                                                                                                                                                                                                                          | NOTHING                | NOTHING     | 0\.5          | TODO | Antoine |
-| 106 | Creation du bouton "sign in" et "log in" qui permettront plus tard, respectivement, l'inscription et la connexion au compte utilisateur\.                                                                                                                                                                                                                                                                                                                                                                                             | US1                    | 105         | 0\.5          | TODO | Antoine |
-| 107 | Création du fichier "authenticate\.js" qui gerera l'authentification à l'aide du module "passport\.js"\. Il sera placé dans le dossier model\. Il fera le lien avec le lien avec le fichier "index\.js"\. Il aura aussi une vue dans le dossier views qui se nommera "authenticate\.ejs"\.                                                                                                                                                                                                                                            | US1 \- US2 \- US4      | NOTHING     | 0\.5          | TODO | Simon   |
-| 108 | Gestion de la création de compte avec un compte github dans le fichier "authenticate\.js"\.                                                                                                                                                                                                                                                                                                                                                                                                                                           | US1                    | 107         | 1\.5          | TODO | Simon   |
-| 109 | Création de la fonction de connexion dans le fichier "authenticate\.js"\.                                                                                                                                                                                                                                                                                                                                                                                                                                                             | US4                    | 108         | 1             | TODO | Simon   |
-| 110 | Création du bouton "logout" en haut à droite de la page index\. Création de la fonction dans authenticate\.js permettant de se déconnecter\.                                                                                                                                                                                                                                                                                                                                                                                          | US5                    | 109         | 0\.5          | TODO | Simon   |
-| 111 | Création du bouton "add project" dans la page index permettant de créer un projet\.                                                                                                                                                                                                                                                                                                                                                                                                                                                   | US2                    | 105         | 0\.5          | TODO | Simon   |
-| 112 | Création des fichier "project\.js" dans model et "project\.ejs" dans views\. Création des boutons Issues, Tasks, Tests, Releases, Documentation, Sprints, Summary et Project Management dans "project\.ejs"permettant de changer d'onglet\.                                                                                                                                                                                                                                                                                           | US2 \- US11            | 111         | 0\.5          | TODO | Florian |
-| 113 | Création du fichier "issues\.js" dans model et "issues\.ejs" dans views\. Dans la vue, créer un bouton "new issue"\.                                                                                                                                                                                                                                                                                                                                                                                                                  | US12                   | 112         | 0\.5          | TODO | Florian |
-| 114 | Création de la fonction d'écriture des issues dans la base de données dans le fichier "database\.js"\.                                                                                                                                                                                                                                                                                                                                                                                                                                | US12                   | 113         | 1             | TODO | Florian |
-| 115 | Création du bouton "Confirm" et "Cancel" qui utiliseront les fonctions  d'écriture de database\.js                                                                                                                                                                                                                                                                                                                                                                                                                                    | US12                   | 114         | 0\.5          | TODO | Florian |
-| 116 | Création de l'affichage de la liste des issues en "clickable" pour la modification de l'issue dans le fichier "issues\.ejs"\. Création du formulaire de modification de l'issue avec modification dans la base de données dans "database\.js"                                                                                                                                                                                                                                                                                         | US14                   | 114         | 0\.5          | TODO | Florian |
-| 117 | Création du bouton "Delete" pour les issues dans "issues\.ejs"\. Création de la fonction de suppression d'une issue dans "database\.js"                                                                                                                                                                                                                                                                                                                                                                                               | US13                   | 114         | 0\.5          | TODO | Florian |
-| 118 | Création du formulaire de confirmation \("Yes" et "No"\) pour la suppression d'une issue\.                                                                                                                                                                                                                                                                                                                                                                                                                                            | US13                   | 116         | 0\.5          | TODO | Florian |
-| 119 | Création du fichier "tasks\.js" dans model et "tasks\.ejs" dans views\. Dans la vue, créer un bouton "new task"\.                                                                                                                                                                                                                                                                                                                                                                                                                     | US16                   | 112         | 0\.5          | TODO | Antoine |
-| 120 | Création de la fonction d'écriture des tasks dans la base de données dans le fichier "database\.js"\.                                                                                                                                                                                                                                                                                                                                                                                                                                 | US16                   | 119         | 1             | TODO | Antoine |
-| 121 | Création du bouton "Confirm" et "Cancel" qui utiliseront les fonctions  d'écriture de database\.js                                                                                                                                                                                                                                                                                                                                                                                                                                    | US16                   | 120         | 0\.5          | TODO | Antoine |
-| 122 | Création de l'affichage de la liste des issues en "clickable" pour la modification de la tasks dans le fichier "tasks\.ejs"\. Création du formulaire de modification de l'issue avec modification dans la base de données dans "database\.js"                                                                                                                                                                                                                                                                                         | US16                   | 120         | 0\.5          | TODO | Antoine |
-| 123 | Création du bouton "Delete" pour les tasks dans "tasks\.ejs"\. Création de la fonction de suppression d'une task dans "database\.js"                                                                                                                                                                                                                                                                                                                                                                                                  | US15                   | 120         | 0\.5          | TODO | Antoine |
-| 124 | Création du formulaire de confirmation \("Yes" et "No"\) pour la suppression d'une task\.                                                                                                                                                                                                                                                                                                                                                                                                                                             | US15                   | 122         | 0\.5          | TODO | Antoine |
-| 125 | Création du fichier "tests\.js" dans model et "tests\.ejs" dans views\. Dans la vue, créer un bouton "new test"\.                                                                                                                                                                                                                                                                                                                                                                                                                     | US23                   | 112         | 0\.5          | TODO | Simon   |
-| 126 | Création de la fonction d'écriture des tests dans la base de données dans le fichier "database\.js"\.                                                                                                                                                                                                                                                                                                                                                                                                                                 | US23                   | 113         | 1             | TODO | Simon   |
-| 127 | Création du bouton "Confirm" et "Cancel" qui utiliseront les fonctions  d'écriture de database\.js                                                                                                                                                                                                                                                                                                                                                                                                                                    | US23                   | 114         | 0\.5          | TODO | Simon   |
-| 128 | Création de l'affichage de la liste des tests en "clickable" pour la modification d'un test dans le fichier "tests\.ejs"\. Création du formulaire de modification du test avec modification dans la base de données dans "database\.js"                                                                                                                                                                                                                                                                                               | US25                   | 114         | 0\.5          | TODO | Simon   |
-| 129 | Création du bouton "Delete" pour les tests dans "tests\.ejs"\. Création de la fonction de suppression d'un test dans "database\.js"                                                                                                                                                                                                                                                                                                                                                                                                   | US24                   | 114         | 0\.5          | TODO | Simon   |
-| 130 | Création du formulaire de confirmation \("Yes" et "No"\) pour la suppression d'un test\.                                                                                                                                                                                                                                                                                                                                                                                                                                              | US24                   | 116         | 0\.5          | TODO | Simon   |
-| 131 | Création du bouton "give admin rights" qui permet d'afficher la liste des participants au projet et de leur donner un projet dans le fichier "project\.ejs"\. Création de la fonction permettant d'échanger les rôles de deux utilisateurs pour le don de droits\.                                                                                                                                                                                                                                                                    | US10                   | 111         | 1             | TODO | Antoine |
-| 132 | Création du formulaire de confirmation \("Yes" et "No"\) pour le don de droits administrateur\.                                                                                                                                                                                                                                                                                                                                                                                                                                       | US10                   | 131         | 0\.5          | TODO | Antoine |
+| 100 | "Démarage du projet. Création d'un fichier "" package.json "" qui va définir le projet. Le projet aura pour nom : saf-scrum ; Il commencera en version 0.1.0 ; Ces dépendances seront : "" express "",""express-session"","" ejs "", "" body-parser "", ""passport"",""passport-local"",""connect-ensure-login"",""morgan"",""mysql"",""""; son main se nommera "" index.js "", il aura pour description : "" projet saf-scrum ""
+ Définition de l'architecture : On choisira Model-Vue-Controller , donc création des dossiers models, views et controller. Le fichier index.js sera placé dans la racine du projet.
+" | ALL | NOTHING | 0.5 | DONE | Simon |
+| 101 | "Création de la base de données MySQL sur phpMyAdmin avec pour info :
+host: ""dbserver.emi.u-bordeaux.fr"",
+  user: ""agourgue"",
+  password: ""cdp2019"",
+  database: ""agourgue""" | ALL | NOTHING | 0.5 | DONE | Simon |
+| 102 | "Initialisation des tables dans la base de données (Users, Projects, Issues, Tests, Tasks, Documentation, Sprints, Releases, Tasks_Users, Projects_Users, Tasks_Tasks, Sprints_Issues, Releases_Issues et Sprints_Releases).
+users :
+username VARCHAR(30) NOT NULL,
+email TEXT,
+password TEXT,
+PRIMARY KEY (username)
+
+projects :
+_project_name VARCHAR(50) NOT NULL ,
+_owner_name VARCHAR(30) NOT NULL,
+description TEXT,
+PRIMARY KEY (_project_name, _owner_name)
+
+projects_users :
+_user_name VARCHAR(50) NOT NULL,
+_project_name VARCHAR(50) NOT NULL,
+PRIMARY KEY (_user_name, _project_name)
+
+tasks_users :
+_task_id INT NOT NULL,
+_user_name VARCHAR(50) NOT NULL,
+PRIMARY KEY(_task_id, _user_name)
+
+tasks :
+_task_id INT NOT NULL,
+description TEXT NOT NULL,
+state TEXT NOT NULL,
+_issue_id INT,
+_project_name VARCHAR(50),
+PRIMARY KEY (_task_id, _project_name)
+
+tasks_tasks :
+_task_id INT NOT NULL,
+_dependency_task_id INT NOT NULL,
+PRIMARY KEY (_task_id, _dependency_task_id)
+
+tests :
+_id INT NOT NULL AUTO_INCREMENT,
+description TEXT NOT NULL,
+state TEXT NOT NULL,
+result_description TEXT,
+_issue_id INT NOT NULL,
+_project_name VARCHAR(50) NOT NULL,
+PRIMARY KEY (_id, _project_name)   -- a tester  auto increment + project id --------------
+
+documentation :
+_id INT NOT NULL,
+filepath TEXT NOT NULL,
+_project_name VARCHAR(50) NOT NULL,
+PRIMARY KEY(_id)
+
+issues :
+_issue_id INT NOT NULL,
+description TEXT NOT NULL,
+difficulty INT NOT NULL,
+priority TEXT NOT NULL,
+us_num  | TEXT NOT NULL,
+test_state TEXT NOT NULL,
+_project_name VARCHAR(50) NOT NULL,
+PRIMARY KEY (_issue_id, _project_name)
+
+sprints_issues :
+_issue_id INT NOT NULL,
+_sprint_id INT NOT NULL,
+PRIMARY KEY (_issue_id, _sprint_id)
+
+sprints :
+_name VARCHAR(50) NOT NULL,
+starting_date DATE NOT NULL,
+ending_date DATE NOT NULL,
+description TEXT ,
+_project_name VARCHAR(50) NOT NULL,
+PRIMARY KEY(_name, _project_name)
+
+sprints_releases :
+_sprint_id INT NOT NULL,
+_release_id INT NOT NULL,
+PRIMARY KEY (_sprint_id, _release_id)
+
+releases :
+_id INT NOT NULL AUTO_INCREMENT,
+filepath TEXT NOT NULL,
+creation_date DATETIME NOT NULL,
+version_num INT NOT NULL,
+description TEXT NOT NULL,
+_project_name VARCHAR(50) NOT NULL,
+PRIMARY KEY (_id, _project_name)
+
+realses_issues :
+_issue_id INT NOT NULL,
+_release_id INT NOT NULL,
+PRIMARY KEY (_issue_id, _release_id)" | ALL | NOTHING | 0.5 | DONE | Simon |
+| 103 | Création des fichiers "database_header.js" qui fais la connexion avec la base de données, elle contiendra une fonction getDatabase() retournant la constante "database" contenant les infos de connection. Création des fichiers "database_select.js" pour les fonctions de récupérations des données, "database_insert.js" pour les fonctions d'insertions de données et "database_delete.js" pour les fonctions de supressions des données. Toutes ces fonctions devront être exportés afin de les utiliser dans d'autres fichiers. | ALL | 102 | 0.5 | DONE | Simon |
+| 104 | Création de la fonction de récupération d'un utilisateur avec un "username" et un "password" dans le fichier "database_select.js". Création d'une fonction d'insertion d'un utilisateur avec un "username", un "email" et un "password" dans le fichier "database_insert.js". | US4 | 103 | 1 | DONE | Simon |
+| 105 | Création de la page d'accueil avec un fichier "index.js" dans model et "index.ejs" dans le dossier views. Dans un premier temps, le serveur devra être disponible en localhost sur le port 8080. | ALL | NOTHING | 0.5 | DONE | Florian |
+| 106 | Création d'un formulaire avec les champs "username" et "password" et d'un bouton "log in" dans le ficher "index.ejs" qui permettront de se connecter une fois les champs remplis.  Création d'un bouton "create account" placé un dessous du bouton "log in" qui nous redirigera vers une autre page contenant un formulaire permettant de nous créer un compte. Le second formulaire contient les champs ""mail", "username" et "password". | US1 | 105 | 0.5 | DONE | Florian |
+| 107 | Création du fichier "authenticate.js" qui gerera l'authentification à l'aide du module "passport.js". Il sera placé dans le dossier model. Il fera le lien avec le lien avec le fichier "index.js". | US1 - US2 - US4 | NOTHING | 0.5 | DONE | Antoine |
+| 108 | Création des fonctions de connexion et de déconnexion d'un utlisateur à l'aide du module "passeport", dans le fichier "authenticate.js". Un appel à ses fonctions doit être fait dans "index.js"  | US4 | 104 | 3 | DONE | Antoine |
+| 109 | Création des fichier "project.js" dans model et "project.ejs" dans views. Création des boutons Issues, Tasks, Tests, Releases, Documentation, Sprints, Summary et Project Management dans "header.ejs"permettant de changer d'onglet. Création du bouton "logout" en haut à droite de la page projet. | US2 - US11 | NOTHING | 0.5 | DONE | Simon |
+| 110 | "Création du bouton ""add project"" dans la page ""project.ejs"" permettant de créer un projet.
+Création du bouton ""delete project"" dans le fichier ""project.ejs"" pour plus tard, supprimer un projet.
+Afficher la liste des projets de l'utilisateur dans le fichier ""project.ejs""." | US2 | 105 | 0.5 | TODO | Antoine |
+| 111 | "Création d'une fonction d'insertion d'un projet avec un ""project_name"", UN ""owner_name"" et une ""description"" dans le fichier ""database_insert.js"".
+Création d'une fonction (dans database_delete.js) de suppression d'un projet ayant en paramètre le nom de projet et son propriétaire." | US2 | 103 | 0.5 | DONE | Simon |
+| 113 | "Création du fichier ""issues.js"" dans model et ""issues.ejs"" dans views.
+Dans ""issues.js"", créer la classe issue avec comme champs : id (int), description (description), difficulty (int), priority (String), test_state (String).
+Dans la vue, créer un bouton ""new issue""." | US12 | 110 | 0.5 | TODO | Florian |
+| 114 | Création de la fonction d'écriture, de lecture et de suppression des issues dans la base de données dans les fichier  "database_insert.js", "database_select.js" et "database_delete.js" | US12 | 113 | 1 | TODO | Florian |
+| 115 | Création du bouton "Confirm" et "Cancel" qui utiliseront les fonctions  d'écriture de "database_insert.js"; | US12 | 114 | 0.5 | TODO | Florian |
+| 116 | Création de l'affichage de la liste des issues en "clickable" pour la modification de l'issue dans le fichier "issues.ejs". Création du formulaire de modification de l'issue avec modification dans la base de données dans "database_insert.js" | US14 | 114 | 0.5 | TODO | Florian |
+| 117 | Création du bouton "Delete" pour les issues dans "issues.ejs". Création de la fonction de suppression d'une issue dans "database_delete.js" | US13 | 114 | 0.5 | TODO | Florian |
+| 118 | Création du formulaire de confirmation ("Yes" et "No") pour la suppression d'une issue. | US13 | 116 | 0.5 | TODO | Florian |
+| 119 | Création du fichier "tasks.js" dans model et "tasks.ejs" dans views. Dans la vue, créer un bouton "new task". | US16 | 110 | 0.5 | TODO | Antoine |
+| 120 | Création de la fonction d'écriture et de lecture des tasks dans la base de données dans le fichier "database_insert.js" et "database_select.js". | US16 | 119 | 1 | TODO | Antoine |
+| 121 | Création du bouton "Confirm" et "Cancel" qui utiliseront les fonctions  d'écriture de "database_insert.js" | US16 | 120 | 0.5 | TODO | Antoine |
+| 122 | Création de l'affichage de la liste des issues en "clickable" pour la modification de la tasks dans le fichier "tasks.ejs". Création du formulaire de modification de l'issue avec modification dans la base de données dans "database_insert.js" | US16 | 120 | 0.5 | TODO | Antoine |
+| 123 | Création du bouton "Delete" pour les tasks dans "tasks.ejs". Création de la fonction de suppression d'une task dans "database_delete.js" | US15 | 120 | 0.5 | TODO | Antoine |
+| 124 | Création du formulaire de confirmation ("Yes" et "No") pour la suppression d'une task. | US15 | 122 | 0.5 | TODO | Antoine |
+| 125 | Création du fichier "tests.js" dans model et "tests.ejs" dans views. Dans la vue, créer un bouton "new test". | US23 | 110 | 0.5 | TODO | Simon |
+| 126 | Création de la fonction d'écriture et de lecture des tests dans la base de données dans le fichier "database_insert.js" et "database_select.js".  | US23 | 113 | 1 | TODO | Simon |
+| 127 | Création du bouton "Confirm" et "Cancel" qui utiliseront les fonctions  d'écriture de "database_insert.js". | US23 | 114 | 0.5 | TODO | Simon |
+| 128 | Création de l'affichage de la liste des tests en "clickable" pour la modification d'un test dans le fichier "tests.ejs". Création du formulaire de modification du test avec modification dans la base de données dans "database_insert.js". | US25 | 114 | 0.5 | TODO | Simon |
+| 129 | Création du bouton "Delete" pour les tests dans "tests.ejs". Création de la fonction de suppression d'un test dans "database_delete.js" | US24 | 114 | 0.5 | TODO | Simon |
+| 130 | Création du formulaire de confirmation ("Yes" et "No") pour la suppression d'un test. | US24 | 116 | 0.5 | TODO | Simon |
+| 131 | Création du bouton "give admin rights" qui permet d'afficher la liste des participants au projet et de leur donner un projet dans le fichier "project.ejs". Création de la fonction permettant d'échanger les rôles de deux utilisateurs pour le don de droits dans "database_insert.js". | US10 | 109 | 1 | TODO | Antoine |
+| 132 | Création du formulaire de confirmation ("Yes" et "No") pour le don de droits administrateur. | US10 | 131 | 0.5 | TODO | Antoine |
