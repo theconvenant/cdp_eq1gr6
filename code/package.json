@@ -4,7 +4,7 @@
   "description": "projet saf-scrum",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --exit"
   },
   "author": "GOURGUE Antoine, LAJOINIE Florian, GRIFFAULT Simon",
   "license": "ISC",
@@ -14,11 +14,13 @@
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "mocha": "^6.2.2",
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "selenium-webdriver": "^4.0.0-alpha.5"
   },
   "devDependencies": {
     "eslint": "^6.6.0",

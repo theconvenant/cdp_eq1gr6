@@ -1,10 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-// const ejs = require('ejs')
 const path = require('path')
 const app = express()
+// const databaseSelect = require('./db_controller/database_select')
+// const databaseInsert = require('./db_controller/database_insert')
+// const databaseDelete = require('./db_controller/database_delete')
+const projectDb = require('./db_controller/project_db')
 
-const authenticate = require('./models/authenticate')
+const authenticate = require('./routes/authenticate')
 
 app.use(require('morgan')('combined'))
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -18,16 +21,22 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, '.', '/views'))
 app.use(express.static(path.join(__dirname, '.', 'views')))
 
+// import des routes
+require('./routes/projects')(app)
+require('./routes/register')(app)
+require('./routes/login')(app)
+
+const issues = new (require('./routes/issues'))(app)
+const projectManagement = new (require('./routes/projectManagement'))(app)
+const documentation = new (require('./routes/documentation'))(app)
+const releases = new (require('./routes/releases'))(app)
+const sprints = new (require('./routes/sprints'))(app)
+const tests = new (require('./routes/tests'))(app)
+const tasks = new (require('./routes/tasks'))(app)
+const summary = new (require('./routes/summary'))(app)
+
 app.get('/', function (req, res) {
     res.render('index')
-})
-
-app.get('/register', function (req, res) {
-    res.render('register')
-})
-
-app.post('/register', function (req, res) {
-    res.render('register')
 })
 
 app.post('/',
@@ -36,19 +45,29 @@ app.post('/',
         res.redirect('/projects')
     })
 
-app.get('/projects',
+app.post('/projectRedirect',
     require('connect-ensure-login').ensureLoggedIn(),
     function (req, res) {
-        res.render('projects', { user: req.user })
+        const id = req.body.idProject
+        projectDb.findProjectById(id).then(function (project) {
+            const name = project[0]._project_name
+            issues.setProjectId(id, name)
+            projectManagement.setProjectId(id, name, project[0]._owner_name)
+            documentation.setProjectId(id, name)
+            releases.setProjectId(id, name)
+            sprints.setProjectId(id, name)
+            tests.setProjectId(id, name)
+            tasks.setProjectId(id, name)
+            summary.setProjectId(id, name)
+            res.redirect('/summary')
+        })
     })
 
-app.get('/logout',
-    function (req, res) {
-        req.logout()
-        res.redirect('/')
-    })
+function redirectUnmatched (req, res) {
+    res.redirect('/')
+}
 
-// Page de connection
+app.use(redirectUnmatched)
 
 app.listen(8080, function () {
     console.log('server listening at port 8080')

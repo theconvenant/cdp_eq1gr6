@@ -4,6 +4,7 @@
 <head>
     <!-- pas de header pour cette page-->
     <link rel='stylesheet' href='css/w3.css'>
+    <link rel='stylesheet' href='css/hideInput.css'>
 </head>
 
 <body >
@@ -11,24 +12,80 @@
          <div class="w3-left-align w3-padding"><h2>SAF-SCRUM</h2></div>
          <div class="w3-display-topright"><a href="/logout" class="w3-button w3-teal w3-hover-green"><h2>logout</h2></a></div>
     </div>
-    <div class="w3-display-middle">
-    <table class="w3-table-all w3-hoverable w3-card-4">
-        <tr class = "w3-blue">
-            <th>Project Name</th>
-            <th>Description</th>
-            <th>Members</th>
-        </tr>
-        <tr >
-            <td>Project1</td>
-            <td>Description</td>
-            <td>Nobody</td>
-        </tr>
-        <tr >
-            <td>Project2</td>
-            <td>Description</td>
-            <td>Nobody</td>
-        </tr>
+    <% if (projectsOwner.length != 0) { %>
+    <div id="ProjectsOwn" class="w3-margin">
+        <table class="w3-table-all w3-hoverable w3-card-4">
+            <h3 class="w3-margin w3-center">Projects Own</h3>
+            <tr class = "w3-blue">
+                <th style="width:30%">Project Name</th>
+                <th style="width:30%">Description</th>
+                <th style="width:30%">Members</th>
+                <th style="width:10%"></th>
+            </tr>
+            <% for (var i = 0; i < projectsOwner.length; ++i) { %>
+            <tr class="Projects">
+                    <td><%= projectsOwner[i]._project_name %></td>
+                    <td><%= projectsOwner[i].description %></td>
+                    <td><%= projectsOwner[i]._owner_name %></td>
+                    <th>
+                        <form action="/projectRedirect" method="POST">
+                            <input class="hideInput" type="text" name="idProject" value=<%= projectsOwner[i]._project_id %>>
+                            <input class="w3-btn w3-ripple w3-green" type="submit" value="Enter Project">
+                        </form>
+                    </th>
+            </tr>
+            <% }; %>
         </table>
     </div>
+    <% }; %>
+    <% if (projectsMember.length != 0) { %>
+        <div id="ProjectsOwn" class="w3-margin">
+            <table class="w3-table-all w3-hoverable w3-card-4">
+                <h3 class="w3-margin w3-center">Suscribed Projects</h3>
+                <tr class = "w3-blue">
+                    <th style="width:30%">Project Name</th>
+                    <th style="width:30%">Description</th>
+                    <th style="width:30%">Members</th>
+                    <th style="width:10%"></th>
+                </tr>
+                <% for (var i = 0; i < projectsMember.length; ++i) { %>
+                <tr class="Projects">
+                        <td><%= projectsMember[i]._project_name %></td>
+                        <td><%= projectsMember[i].description %></td>
+                        <td><%= projectsMember[i]._owner_name %></td>
+                        <th>
+                            <form action="/projectRedirect" method="POST">
+                                <input class="hideInput" type="text" name="idProject" value=<%= projectsMember[i]._project_id %>>
+                                <input class="w3-btn w3-ripple w3-green" type="submit" value="Enter Project">
+                            </form>
+                        </th>
+                </tr>
+                <% }; %>
+            </table>
+        </div>
+    <% }; %>
+    <div class="w3-margin w3-center">
+
+            <button onclick="document.getElementById('addProject').style.display='block'"
+            class="w3-btn w3-ripple w3-green">+ Add Project</button>
+
+            <div id="addProject" class="w3-modal">
+                <div class="w3-modal-content">
+                    <div class="w3-container">
+                        <form class="w3-container project-form" action="/projects" method="POST">
+                            <label>Project name</label>
+                            <input class="w3-input w3-border w3-round" type="text" name="projectName" required>
+                                
+                            <label>Description</label>
+                            <input class="w3-input w3-border w3-round" type="text" name="description">
+                
+                            <input class="w3-btn w3-margin-top w3-ripple w3-green" type="submit" value="Validate">
+                            <button onclick="document.getElementById('addProject').style.display='none'"
+                        class="w3-btn w3-ripple w3-margin-top w3-red">Cancel</span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 </html>
