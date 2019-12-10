@@ -19,14 +19,14 @@ exports.findListIssuesByProjectID = function (projectId) {
 }
 
 /**
- * @param {number} sprintId
+ * @param {number} issueId
  */
-exports.findIssuesInSprint = function (sprintId) {
+exports.getIssuebyId = function (issueId) {
     return new Promise((resolve, reject) => {
-        if (!sprintId) reject(new Error('sprintId is required'))
-        const issueListQuery = 'SELECT * FROM issues WHERE _issue_id IN (SELECT _issue_id FROM sprints_issues WHERE _sprint_id = \'' + sprintId + '\' );'
+        if (!issueId) reject(new Error('issueId is required'))
+        const getQuery = 'SELECT * FROM issues WHERE _issue_id = ' + issueId + ' ;'
         database.getDatabase().then(
-            db => db.query(issueListQuery, function (err, results) {
+            db => db.query(getQuery, function (err, results) {
                 if (err) {
                     reject(err.sqlMessage)
                 }
@@ -35,6 +35,27 @@ exports.findIssuesInSprint = function (sprintId) {
         )
     })
 }
+
+/**
+ * @param {String} usNum
+ * @param {number} projectId
+ */
+exports.getIssueByUsNum = function (usNum, projectId) {
+    return new Promise((resolve, reject) => {
+        if (!usNum) reject(new Error('usNum is required'))
+        if (!projectId) reject(new Error('projectId is required'))
+        const getQuery = 'SELECT * FROM issues WHERE us_num = \'' + usNum + '\' AND _project_id = ' + projectId + ';'
+        database.getDatabase().then(
+            db => db.query(getQuery, function (err, results) {
+                if (err) {
+                    reject(err.sqlMessage)
+                }
+                resolve(JSON.parse(JSON.stringify(results)))
+            })
+        )
+    })
+}
+
 /**
  * @param {number} releaseId
  */
@@ -74,12 +95,13 @@ exports.deleteIssue = function (projectId, issueId) {
     })
 }
 
-
-// issueId and difficulty are Integers, the rest are Strings
-// this is why they both are not souronded by ' in the insertQuery String
 /**
  * @param {String} description
- * @param {number} taskId
+ * @param {number} difficulty
+ * @param {String} priority
+ * @param {String} usNum
+ * @param {String} testState
+ * @param {number} projectId
  */
 exports.insertIssue = function (description, difficulty, priority, usNum, State, projectId) {
     return new Promise((resolve, reject) => {
@@ -89,7 +111,8 @@ exports.insertIssue = function (description, difficulty, priority, usNum, State,
         if (!usNum) reject(new Error('usNum is required'))
         if (!State) reject(new Error('State is required'))
         if (!projectId) reject(new Error('projectId is required'))
-        const insertQuery = 'INSERT INTO issues (description, difficulty, priority, us_num, test_state, _project_id) VALUES (\'' + description + '\', ' + difficulty + ', \'' + priority + '\', \'' + usNum + '\', \'' + State + '\', ' + projectId + ');'
+        const insertQuery = 'INSERT INTO issues (description, difficulty, priority, us_num, test_state, _project_id) VALUES (\'' +
+        description + '\', ' + difficulty + ', \'' + priority + '\', \'' + usNum + '\', \'' + State + '\', ' + projectId + ');'
         database.getDatabase().then(
             db => db.query(insertQuery, function (err, results) {
                 if (err) {

@@ -2,10 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
 const app = express()
-// const databaseSelect = require('./db_controller/database_select')
-// const databaseInsert = require('./db_controller/database_insert')
-// const databaseDelete = require('./db_controller/database_delete')
+const port = 8080
 const projectDb = require('./db_controller/project_db')
+const userDb = require('./db_controller/user_db')
 
 const authenticate = require('./routes/authenticate')
 
@@ -35,6 +34,8 @@ const tests = new (require('./routes/tests'))(app)
 const tasks = new (require('./routes/tasks'))(app)
 const summary = new (require('./routes/summary'))(app)
 
+var userName = ''
+
 app.get('/', function (req, res) {
     res.render('index')
 })
@@ -42,6 +43,7 @@ app.get('/', function (req, res) {
 app.post('/',
     authenticate.passport.authenticate('local', { failureRedirect: '/' }),
     function (req, res) {
+        userName = req.body.username
         res.redirect('/projects')
     })
 
@@ -63,12 +65,19 @@ app.post('/projectRedirect',
         })
     })
 
+app.get('/deleteAccount',
+    function (req, res) {
+        req.logOut()
+        userDb.deleteAccount(userName)
+        res.redirect('/')
+    })
+
 function redirectUnmatched (req, res) {
-    res.redirect('/')
+    res.redirect('/projects')
 }
 
 app.use(redirectUnmatched)
 
-app.listen(8080, function () {
+app.listen(port, function () {
     console.log('server listening at port 8080')
 })

@@ -2,13 +2,66 @@ const database = require('./database_header')
 
 /**
  * @param {number} sprintId
+ */
+exports.findSprintById = function (sprintId) {
+    return new Promise((resolve, reject) => {
+        if (!sprintId) reject(new Error('sprintId is required'))
+        const sprintQuery = 'SELECT * FROM sprints WHERE _id = ' + sprintId + ';'
+        database.getDatabase().then(
+            db => db.query(sprintQuery, function (err, results) {
+                if (err) {
+                    reject(err.sqlMessage)
+                }
+                resolve(JSON.parse(JSON.stringify(results)))
+            })
+        )
+    })
+}
+
+/**
+ * @param {string} sprintName
  * @param {number} projectId
  */
-exports.findSprintByName = function (sprintId, projectId) {
+exports.findSprintbyName = function (sprintName, projectId) {
+    return new Promise((resolve, reject) => {
+        if (!sprintName) reject(new Error('sprintName is required'))
+        if (!projectId) reject(new Error('projectId is required'))
+        const sprintQuery = 'SELECT * FROM sprints WHERE name = \'' + sprintName + '\' AND _project_id = ' + projectId
+        database.getDatabase().then(
+            db => db.query(sprintQuery, function (err, results) {
+                if (err) {
+                    reject(err.sqlMessage)
+                }
+                resolve(JSON.parse(JSON.stringify(results)))
+            })
+        )
+    })
+}
+
+exports.findIssueListOfSprint = function (sprintId, projectId) {
     return new Promise((resolve, reject) => {
         if (!sprintId) reject(new Error('sprintId is required'))
         if (!projectId) reject(new Error('projectId is required'))
-        const sprintQuery = 'SELECT * FROM sprints WHERE _id = ' + sprintId + ' AND _project_id = ' + projectId + ';'
+        const findQuery = 'SELECT * FROM issues WHERE _project_id = ' + projectId + ' AND _issue_id IN (' +
+        'SELECT _issue_id FROM sprints_issues WHERE _sprint_id = ' + sprintId + ')'
+        database.getDatabase().then(
+            db => db.query(findQuery, function (err, results) {
+                if (err) {
+                    reject(err.sqlMessage)
+                }
+                resolve(JSON.parse(JSON.stringify(results)))
+            })
+        )
+    })
+}
+
+/**
+ * @param {number} projectId
+ */
+exports.findSprintsByProjectId = function (projectId) {
+    return new Promise((resolve, reject) => {
+        if (!projectId) reject(new Error('projectId is required'))
+        const sprintQuery = 'SELECT * FROM sprints WHERE _project_id = ' + projectId + ';'
         database.getDatabase().then(
             db => db.query(sprintQuery, function (err, results) {
                 if (err) {
@@ -24,7 +77,7 @@ exports.findSprintByName = function (sprintId, projectId) {
  * @param {number} issueId
  * @param {number} sprintId
  */
-exports.insertIssueInSprint = function (issueId, sprintId) {
+exports.insertIssueInSprint = function (sprintId, issueId) {
     return new Promise((resolve, reject) => {
         if (!issueId) reject(new Error('issueId is required'))
         if (!sprintId) reject(new Error('sprintId is required'))
@@ -55,10 +108,27 @@ exports.insertSprint = function (name, startDate, endDate, projectId, descriptio
         if (!projectId) reject(new Error('projectId is required'))
         if (description) {
             description = '\'' + description + '\''
+        } else {
+            description = null
         }
-        const insertQuery = 'INSERT INTO sprints VALUES ( \'' + name + '\', \'' + startDate + '\', \'' + endDate + '\', ' + description + ', ' + projectId + ');'
+        const insertQuery = 'INSERT INTO sprints (name, starting_date, ending_date, description, _project_id) VALUES ( \'' + name + '\', \'' + startDate + '\', \'' + endDate + '\', ' + description + ', ' + projectId + ');'
         database.getDatabase().then(
             db => db.query(insertQuery, function (err, results) {
+                if (err) {
+                    reject(err.sqlMessage)
+                }
+                resolve(results)
+            })
+        )
+    })
+}
+
+exports.deleteSprint = function (sprintId) {
+    return new Promise((resolve, reject) => {
+        if (!sprintId) reject(new Error('sprintId is required'))
+        const deleteQuery = 'DELETE FROM sprints WHERE _id = ' + sprintId + ';'
+        database.getDatabase().then(
+            db => db.query(deleteQuery, function (err, results) {
                 if (err) {
                     reject(err.sqlMessage)
                 }

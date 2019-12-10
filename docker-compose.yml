@@ -1,0 +1,13 @@
+version: '3'
+services:
+
+  saf-scrum:
+    build: ./code
+    ports:
+     - "8080:8080"
+    depends_on:
+     - mysql
+    restart: always
+
+  mysql:
+    build: ./database_files

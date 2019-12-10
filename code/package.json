@@ -4,17 +4,20 @@
   "description": "projet saf-scrum",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --exit"
+    "start": "node index.js",
+    "test": "mocha test/unit_tests/* --exit"
   },
   "author": "GOURGUE Antoine, LAJOINIE Florian, GRIFFAULT Simon",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "chromedriver": "^78.0.1",
     "connect-ensure-login": "^0.1.1",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "mocha": "^6.2.2",
+    "moment": "^2.24.0",
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
     "passport": "^0.4.0",

@@ -5,11 +5,192 @@
     <% include  ./includes/header %>
     <script type="text/javascript">
         changeOnglet('sprints')
+        function openIssue(issueName) {
+            var i;
+            var x = document.getElementsByClassName("issues");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";  
+            }
+            document.getElementById(issueName).style.display = "block";  
+        }
     </script>
 </head>
             
-<body >
+<body> 
+    <% if (current_sprint) { %>
+    <div id="tasksList" class="w3-panel w3-white w3-card w3-display-container">
+        <h2 class="w3-text-green w3-center""><%=current_sprint.name%></h2>
+        <div class="w3-margin w3-center">
+            <div class="w3-bar w3-lime">
+                <% for (var i = 0; i < issuesInSprint.length; ++i) { %>
+                <button class="w3-bar-item w3-button" onclick="openIssue('<%=issuesInSprint[i]._issue_id%>')"><%=issuesInSprint[i].us_num%></button>
+                <% }; %>
+            </div>
+            <% for (var i = 0; i < issuesInSprint.length; ++i) { %>
+            <div id="<%=issuesInSprint[i]._issue_id%>" class="issues" style="display:none">
+            <h2><%=issuesInSprint[i].us_num%></h2>
+            <p><%=issuesInSprint[i].description%></p>
+            </div>
+            <% }; %>
+        </div>
+        <div class="w3-margin w3-center">
+            <button onclick="document.getElementById('addIssueToSprint').style.display='block'"
+            class="w3-btn w3-ripple w3-green">+ Add Issue to sprint</button>
+    
+            <div id="addIssueToSprint" class="w3-modal">
+                <div class="w3-modal-content w3-animate-bottom">
+                    <div class="w3-container">
+                        <form class="w3-container" action="/addIssueToSprint" method="POST">
+                            
+                            <label>Related Issues</label><br>                                        
+                            <% for (var j = 0; j < issuesList.length; ++j) { %>
+                                <input type="checkbox" name="usList" value="<%=issuesList[j].us_num %>"> <%=issuesList[j].us_num %><br>
+                            <% }; %>
+    
+                            <input class="w3-btn w3-margin-top w3-ripple w3-green" type="submit" value="Validate">
+    
+                            <button onclick="document.getElementById('addIssueToSprint').style.display='none'"
+                        class="w3-btn w3-ripple w3-margin-top w3-red">Cancel</span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% if(issuesInSprint) { %>
+        <div class="w3-margin w3-center">
 
+            <button onclick="document.getElementById('addTask').style.display='block'"
+            class="w3-btn w3-ripple w3-green">+ Add Task</button>
+    
+            <div id="addTask" class="w3-modal">
+                <div class="w3-modal-content w3-animate-bottom">
+                    <div class="w3-container">
+                        <form class="w3-container Task-form" action="/insertTasks" method="POST">
+                            <label>Task id</label>
+                            <input class="w3-input w3-border w3-round" type="number" name="taskId" placeholder="must be an integer" required>
+                                
+                            <label>Description</label>
+                            <input class="w3-input w3-border w3-round" type="text" name="description" required>
+    
+                            <label>State</label><br>
+                                <input type="radio" name="state" value="TODO" checked> TODO<br>
+                                <input type="radio" name="state" value="DOING"> DOING<br>
+                                <input type="radio" name="state" value="DONE"> DONE<br>
+    
+                                <label>Related Issues</label><br>                                        
+                                <% for (var j = 0; j < issuesList.length; ++j) { %>
+                                    <input type="checkbox" name="usList" value="<%=issuesList[j].us_num %>"> <%=issuesList[j].us_num %><br>
+                                <% }; %>
+    
+                            <label>Dependency task id</label><br>
+                                <% for (var x = 0; x < taskList.length; ++x) { %>
+                                    <input type="checkbox" name="taskIdList" value="<%=taskList[x]._task_id %>"> <%=taskList[x]._task_id %><br>
+                                <% }; %>
+    
+                                <label>Associated member</label><br>
+                                <% for (var y = 0; y < userNameList.length; ++y) { %>
+                                    <input type="checkbox" name="member" value="<%=userNameList[y]%>"> <%=userNameList[y] %><br>
+                                <% }; %>
+    
+                            <input class="w3-btn w3-margin-top w3-ripple w3-green" type="submit" value="Validate">
+    
+                            <button onclick="document.getElementById('addTask').style.display='none'"
+                        class="w3-btn w3-ripple w3-margin-top w3-red">Cancel</span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% };
+        if(taskInSprintList){%>
+        <div class="w3-margin w3-center w3-cell-row">
+            <div id='TODO' class="w3-margin w3-cell w3-border">
+                <h3 class="w3-border-bottom">TODO</h3>
+                <% for (var i = 0; i < taskInSprintList.length; ++i) { 
+                    if(taskInSprintList[i].state == 'TODO') { %>
+                        <div class="w3-margin w3-center" >
+                            <p> Task id : <%= taskInSprintList[i]._task_id %> </p>
+                            <p> <%= taskInSprintList[i].description %> </p>
+                        </div>
+                    <% }; 
+                };%>
+            </div>
+            <div id='DOING' class="w3-margin w3-cell w3-border">
+                <h3 class="w3-border-bottom">DOING</h3>
+                <% for (var i = 0; i < taskInSprintList.length; ++i) { 
+                    if(taskInSprintList[i].state == 'DOING') { %>
+                        <div class="w3-margin w3-center" >
+                            <p> Task id : <%= taskInSprintList[i]._task_id %> </p>
+                            <p> <%= taskInSprintList[i].description %> </p>
+                        </div>
+                    <% }; 
+                };%>
+            </div>
+            <div id='DONE' class="w3-margin w3-cell w3-border">
+                <h3 class="w3-border-bottom">DONE</h3>
+                <% for (var i = 0; i < taskInSprintList.length; ++i) { 
+                    if(taskInSprintList[i].state == 'DONE') { %>
+                        <div class="w3-margin w3-center" >
+                            <p> Task id : <%= taskInSprintList[i]._task_id %> </p>
+                            <p> <%= taskInSprintList[i].description %> </p>
+                        </div>
+                    <% }; 
+                };%>
+            </div>
+        </div>
+        <%};%>
+    </div>
+    <% };%>
+    <div class="w3-container w3-content">
+        <% if (sprintList.length != 0) { %>
+        <p class="w3-opacity"><b>Sprints</b></p> 
+        <% }; for (var i = 0; i < sprintList.length; ++i) { %>
+            <div class="w3-panel w3-white w3-card w3-display-container">
+                <p class="w3-text-green"><b><%= sprintList[i].name%></b></p>
+                <p><%= sprintList[i].description%></p>
+                <p class="w3-text-green"><%= moment(sprintList[i].starting_date).format('DD/MM/YYYY');%> to 
+                    <%= moment(sprintList[i].ending_date).format('DD/MM/YYYY')%></p>
+                <form class="w3-container" action="/chooseSprint" method="POST">
+                    <button type="submit" value=<%=sprintList[i]._id%>
+                            name="current_sprint" class="w3-btn w3-ripple w3-green w3-margin-bottom">Details</button>
+                </form>
+                <form action="/deleteSprint" method = "POST" onsubmit="return confirm('Are you sure you want to delete this sprint ?')">
+                    <button type="submit" value='<%=sprintList[i]._id %>'
+                        name="sprintId" class="w3-btn w3-ripple w3-red w3-display-bottomright w3-margin">Remove</button>    
+                </form>
+            </div>
+        <% };%>
+    </div>
+
+    <div class="w3-margin w3-center">
+
+        <button onclick="document.getElementById('addSprint').style.display='block'"
+        class="w3-btn w3-ripple w3-green">+ Add Sprint</button>
+
+        <div id="addSprint" class="w3-modal">
+            <div class="w3-modal-content w3-animate-bottom">
+                <div class="w3-container">
+                    <form class="w3-container project-form" action="/insertSprint" method="POST">
+                        <label>Sprint name</label>
+                        <input class="w3-input w3-border w3-round" type="text" name="sprintName" required>
+                            
+                        <label>Description</label>
+                        <input class="w3-input w3-border w3-round" type="text" name="description">
+
+                        <label>Starting date</label>
+                        <input class="w3-input w3-border w3-round" type="date" name="startDate" required>
+
+                        <label>Ending date</label>
+                        <input class="w3-input w3-border w3-round" type="date" name="endDate" required>
+            
+                        <input class="w3-btn w3-margin-top w3-ripple w3-green" type="submit" value="Validate">
+                        <button onclick="document.getElementById('addSprint').style.display='none'"
+                    class="w3-btn w3-ripple w3-margin-top w3-red">Cancel</span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </body>

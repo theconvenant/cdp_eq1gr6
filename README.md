@@ -1,12 +1,27 @@
+<h4>Documentation</h4>
+
+Ici le [Manuel Utilisateur](https://github.com/theconvenant/cdp_eq1gr6/blob/master/UserDoc.md)
+
+Et ici la [Documentation Administrateur](https://github.com/theconvenant/cdp_eq1gr6/blob/master/Install.md)
+
+<h4>Burn down chart</h4>
+
+![](BurnDownChart.png)
+
+<h4>Test et Code review</h4>
+
+[![Build Status](https://travis-ci.org/theconvenant/cdp_gr1eq6_dev.svg?branch=master)](https://travis-ci.org/theconvenant/cdp_gr1eq6_dev)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/theconvenant/cdp_gr1eq6_dev/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/theconvenant/cdp_gr1eq6_dev/?branch=master)
+
 <h4>Les Sprints :</h4>
 
-<h5>Difficulté total du projet : 48</h5>
+<h5>Difficulté total du projet : 80</h5>
 
 | Sprint       | Task        | Difficulté |
 |-------------------|-----------------|------------|
 | [Sprint1.md](https://github.com/theconvenant/cdp_eq1gr6/blob/master/Sprint1.md) | [Task1.md](https://github.com/theconvenant/cdp_eq1gr6/blob/master/Tasks1.md) | 17         |
-| [Sprint2.md](https://github.com/theconvenant/cdp_eq1gr6/blob/master/Sprint2.md) | [Task2.md](https://github.com/theconvenant/cdp_eq1gr6/blob/master/Tasks2.md) | 17         |
-| [Sprint3.md](https://github.com/theconvenant/cdp_eq1gr6/blob/master/Sprint3.md) | [Task3.md](https://github.com/theconvenant/cdp_eq1gr6/blob/master/Tasks3.md) | 14         |
+| [Sprint2.md](https://github.com/theconvenant/cdp_eq1gr6/blob/master/Sprint2.md) | [Task2.md](https://github.com/theconvenant/cdp_eq1gr6/blob/master/Tasks2.md) | 20         |
+| [Sprint3.md](https://github.com/theconvenant/cdp_eq1gr6/blob/master/Sprint3.md) | [Task3.md](https://github.com/theconvenant/cdp_eq1gr6/blob/master/Tasks3.md) | 43         |
 
 
 <h4>Les Issues :</h4>
@@ -39,7 +54,7 @@
 | US24 | 1        | 1          | En tant que participant au projet, je souhaite supprimer un test en cliquant sur le bouton "Delete" qui apparait lorsqu'on clique sur un test\. Je pourrais alors Confirmer ou non la suppression en cliquant sur un des boutons "Yes" ou "No" qui apparraitront dans un pop up avec comme contenu "Voulez\-vous supprimer ce test?"\.                                                                                                                                     |
 | US25 | 1        | 1          | En tant que participant au projet, je souhaite pouvoir modifier un test en cliquant sur un test dans la liste de l'onglet "Tests"\. Cela ouvrira une fenêtre permettant de modifier les champs du test\. Une fois les modification faite, on pourra les valider avec un bouton "Modify" ou les annuler avec un bouton "Cancel"\.                                                                                                                                             |
 | US26 | 1        | 1          | En tant que participant au projet, je souhaite pouvoir affilier un participant à une tâche ou un test depuis l'onget "Tasks" ou "Tests"\. Dans la fenêtre d'information de la tâche et du test, il y a un tableau déroulant et je peux sélectionner le membre qui devra s'occuper de la tâche ou du test\.                                                                                                                                                                   |
-| US27 | 1        | 2          | En tant que participant au projet, je souhaite avoir accès à un récapitulatif sur l'avancement du projet en cours depuis l'onglet "Summary"\. Cela me permettrai de visualiser sous forme de pourcentage la progression des différentes partie du projet \(Issues, Tasks, \.\.\.\)\.                                                                                                                                                                                         |
+| US27 | 1        | 2          | En tant que participant au projet, je souhaite avoir accès à un récapitulatif sur l'avancement du projet en cours depuis l'onglet "Summary"\. Cela me permettrai de visualiser sous forme de pourcentage la progression des différentes partie du projet \(Issues, Tasks, ...)\.                                                                                                                                                                                         |
 | US28 | 1        | 2          | En tant que participant au projet, je souhaite qu'à la fin d'un sprint, les issues non réalisés soient automatiquement transférées vers le prochain sprint\.                                                                                                                                                                                                                                                                                                                 |
 | US29 | 1        | 1          | En tant que participant au projet, je souhaite créer un sprint avec des créneaux à l'aide d'un bouton "add sprint" dans l'onglet "Sprints"\. Un formulaire apparait et on doit remplir le champ "date de début" et "date de fin", on doit aussi cocher, parmis une liste, les issues qui devront être réalisées pendant le sprint\.                                                                                                                                          |
 | US30 | 1        | 1          | En tant que participant au projet, je souhaite que lorsque je clique sur le nom d'une tâche, peut importe dans quel onglet je suis, je sois redirigé vers la tâche dans l'onglet tâche et la fenêtre d'informations correspondante s'affiche\.                                                                                                                                                                                                                               |
@@ -47,7 +62,7 @@
 | US32 | 1        | 1          | En tant que participant au projet, je souhaite trier mes tâches dans l'onglet "Tasks" ordre alphabétique, par état, par difficulté ou par membre grâce à un menu déroulant "Order by"\.                                                                                                                                                                                                                                                                                      |
 | US33 | 1        | 3          | En tant que participant au projet, je souhaite qu'une couleur me soit attibuée et qu'elle serve de bordure pour différencier l'attribution des taches et des tests\.                                                                                                                                                                                                                                                                                                         |
 | US34 | 1        | 2          | En tant que participant au projet, je souhaite ajouter un lien github à l'aide d'un bouton "add github project" dans l'onglet "Summary" afin qu'il soit accessible par tous\.                                                                                                                                                                                                                                                                                                |
-
+| US35 | 1        | 3          | En tant que participant au projet, je souhaite avoir accès à un burn down chart de mon projet, généré automatiquement dans l'onglet "Summary" ainsi qu'un pourcentage de tâches DONE de chaque sprint.                                                                                                                                                                                                                                                                                                |
 
 
 <h4>Définitions :</h4>
